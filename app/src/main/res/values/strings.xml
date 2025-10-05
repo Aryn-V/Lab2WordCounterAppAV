@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Lab2_WordCounterNew</string>
     <string name="count">Count</string>
+    <string name="warning_empty">Please enter some text first!</string>
+    <string name="invalid_selection">Invalid selection!</string>
+    <string name="toast_selected">Selected: %1$s</string>
+    <string name="word_counter_app">Word Counter App</string>
+    <string name="enter_text_here">Enter Text Here</string>
+    <string name="chars_count">Characters: %1$d</string>
+    <string name="words_count">Words: %1$d</string>
+    <string name="sentences_count">Sentences: %1$d</string>
+    <string name="numbers_count">Numbers: %1$d</string>
     <string-array name="user_selections">
         <item>Sentences</item>
         <item>Words</item>

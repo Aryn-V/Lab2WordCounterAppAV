@@ -1,6 +1,7 @@
 package com.example.lab2_wordcounternew;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+/// [...](https://www.w3schools.com/java/java_regex.asp)
 public class RegexFunctions {
     public static int countSentences(String text) {
         Pattern pattern = Pattern.compile("[.!?]");

@@ -17,10 +17,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 /// Fin
 public class MainActivity extends AppCompatActivity {
-    EditText edUserInput;
-    Spinner spCountingOptions;
-    TextView tvResult;
-    Button btnCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        edUserInput = (EditText) findViewById(R.id.edUserInput);
-        spCountingOptions = findViewById(R.id.spCountingOptions);
-        tvResult = findViewById(R.id.tvResult);
-        btnCount = findViewById(R.id.btnCount);
-
+        //initialising elements
+        EditText edUserInput = findViewById(R.id.edUserInput);
+        Button btnCount = findViewById(R.id.btnCount);
+        TextView tvResult = findViewById(R.id.tvResult);
+        Spinner spCountingOptions = findViewById(R.id.spCountingOptions);
+        //spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.user_selections,
@@ -44,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCountingOptions.setAdapter(adapter);
-
+            // Shows the selected item from menu
         spCountingOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String selectedItem = parentView.getItemAtPosition(position).toString();
-                Toast.makeText(MainActivity.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,getString(R.string.toast_selected, selectedItem), Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -59,38 +55,39 @@ public class MainActivity extends AppCompatActivity {
 
         btnCount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//trimming user input
                 String userInput = edUserInput.getText().toString().trim();
                 String selected = spCountingOptions.getSelectedItem().toString();
                 int result = 0;
 
                 // Validation check
                 if (userInput.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Please enter some text first!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,getString(R.string.warning_empty), Toast.LENGTH_SHORT).show();//using string value in xml
                     return;
                 }
 
-                // If–Else logic for counting
+                // If else logic for spinner
                 if (selected.equals("Chars")) {
                     // Using CharsCounter class
                     CharsCounter cc = new CharsCounter();
                     result = cc.countChars(userInput);
-                    tvResult.setText("Characters: " + result);
+                    // using integer value in xml file
+                    tvResult.setText(getString(R.string.chars_count, result));
 
                 } else if (selected.equals("Words")) {
                     result = WordsCounter.countWords(userInput);
-                    tvResult.setText("Words: " + result);
+                    tvResult.setText(getString(R.string.words_count, result));
 
                 } else if (selected.equals("Sentences")) {
                     result = RegexFunctions.countSentences(userInput);
-                    tvResult.setText("Sentences: " + result);
+                    tvResult.setText(getString(R.string.sentences_count, result));
 
                 } else if (selected.equals("Numbers")) {
                     result = RegexFunctions.countNumbers(userInput);
-                    tvResult.setText("Numbers: " + result);
+                    tvResult.setText(getString(R.string.numbers_count, result));
 
                 } else {
-                    Toast.makeText(MainActivity.this, "Invalid selection!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,getString(R.string.invalid_selection), Toast.LENGTH_SHORT).show();
                 }
             }
         });
