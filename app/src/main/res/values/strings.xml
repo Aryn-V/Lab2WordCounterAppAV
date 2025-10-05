@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lab2_WordCounterNew</string>
+    <string name="count">Count</string>
+    <string-array name="user_selections">
+        <item>Sentences</item>
+        <item>Words</item>
+        <item>Chars</item>
+        <item>Numbers</item>
+    </string-array>
+</resources>
